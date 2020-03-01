@@ -20,6 +20,16 @@ impl Choice {
         return rng.gen();
     }
 }
+
+impl Distribution<Choice> for Standard {
+    fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Choice {
+        match rng.gen_range(0, 3) {
+            0 => Choice::Left,
+            1 => Choice::Right,
+            _ => Choice::Op,
+        }
+    }
+}
 #[derive(Debug)]
 pub enum Operation {
     Add,
@@ -36,13 +46,6 @@ impl Operation {
     }
 }
 
-#[derive(Debug)]
-pub struct Node {
-    pub operation: Operation,
-    pub value: Option<isize>,
-    pub children: Vec<Node>,
-}
-
 impl Distribution<Operation> for Standard {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Operation {
         match rng.gen_range(0, 4) {
@@ -50,16 +53,6 @@ impl Distribution<Operation> for Standard {
             1 => Operation::Sub,
             2 => Operation::Mul,
             _ => Operation::Div,
-        }
-    }
-}
-
-impl Distribution<Choice> for Standard {
-    fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Choice {
-        match rng.gen_range(0, 3) {
-            0 => Choice::Left,
-            1 => Choice::Right,
-            _ => Choice::Op,
         }
     }
 }
@@ -74,6 +67,13 @@ impl fmt::Display for Operation {
             Operation::Val => write!(f, "v"),
         }
     }
+}
+
+#[derive(Debug)]
+pub struct Node {
+    pub operation: Operation,
+    pub value: Option<isize>,
+    pub children: Vec<Node>,
 }
 
 impl Node {
@@ -157,7 +157,7 @@ impl Node {
         } else {
             //if it is a val
             let mut rng = thread_rng();
-            let new_val = rng.gen_range(0,101);
+            let new_val = rng.gen_range(0, 101);
             self.value = Some(new_val);
             true
         }
@@ -174,12 +174,12 @@ impl fmt::Display for Node {
                         Some(val) => write!(
                             f,
                             "(<{} {}> {} {})",
-                             self.operation, val, self.children[0], self.children[1]
+                            self.operation, val, self.children[0], self.children[1]
                         ),
                         None => write!(
                             f,
                             "(<{}> {} {})",
-                             self.operation, self.children[0], self.children[1]
+                            self.operation, self.children[0], self.children[1]
                         ),
                     }
                 } else {
