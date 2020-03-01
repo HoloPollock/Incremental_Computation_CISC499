@@ -1,18 +1,24 @@
-use std::fmt;
 use rand::{
-    prelude::*,
     distributions::{Distribution, Standard},
+    prelude::*,
     Rng,
 };
+use std::fmt;
 pub trait Calculable {
     fn calc(&mut self) -> isize;
-    fn ignore_memo_calc(&mut self) -> isize;
 }
 #[derive(Debug)]
 enum Choice {
     Left,
     Right,
     Op,
+}
+
+impl Choice {
+    pub fn rand_choice() -> Self {
+        let mut rng = thread_rng();
+        return rng.gen();
+    }
 }
 #[derive(Debug)]
 pub enum Operation {
@@ -21,6 +27,13 @@ pub enum Operation {
     Mul,
     Div,
     Val,
+}
+
+impl Operation {
+    pub fn rand_op() -> Self {
+        let mut rng = thread_rng();
+        return rng.gen();
+    }
 }
 
 #[derive(Debug)]
@@ -32,7 +45,7 @@ pub struct Node {
 
 impl Distribution<Operation> for Standard {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Operation {
-        match rng.gen_range(0,4) {
+        match rng.gen_range(0, 4) {
             0 => Operation::Add,
             1 => Operation::Sub,
             2 => Operation::Mul,
@@ -63,7 +76,6 @@ impl fmt::Display for Operation {
     }
 }
 
-
 impl Node {
     pub fn new_val(val: isize) -> Self {
         Node {
@@ -72,12 +84,83 @@ impl Node {
             children: vec![],
         }
     }
-    fn modify_and_calc(&mut self) {
-        let mut rng = thread_rng();
-        let change: Choice = rng.gen();
-        match change {
+    pub fn is_val(&self) -> bool {
+        return if self.children.len() == 0 {
+            true
+        } else {
+            false
+        };
+    }
 
-        }        
+    pub fn modify_and_calc(&mut self) -> bool {
+        if self.is_val() == false {
+            match Choice::rand_choice() {
+                Choice::Left => {
+                    //Modify and calc but move left if calc is the same return
+                    let is_change = self.children[0].modify_and_calc();
+                    match is_change {
+                        true => {
+                            dbg!(self.value);
+                            let prev_val = self.value.unwrap(); //May be none deal with
+                            self.value = None;
+                            let new_val = self.calc();
+                            if new_val == prev_val {
+                                dbg!("No Change");
+                                return false; // dont need to set as calc resets
+                            } else {
+                                dbg!(self.value);
+                                return true;
+                            }
+                        }
+                        false => {
+                            return false;
+                        }
+                    }
+                }
+                Choice::Right => {
+                    let is_change = self.children[1].modify_and_calc();
+                    match is_change {
+                        true => {
+                            dbg!(self.value);
+                            let prev_val = self.value.unwrap(); //May be none deal with
+                            self.value = None;
+                            let new_val = self.calc();
+                            if new_val == prev_val {
+                                dbg!("No Change");
+                                return false; // dont need to set as calc resets
+                            } else {
+                                dbg!(self.value);
+                                return true;
+                            }
+                        }
+                        false => {
+                            return false;
+                        }
+                    }
+                }
+                Choice::Op => {
+                    let new_op = Operation::rand_op();
+                    self.operation = new_op;
+                    dbg!(&self.value);
+                    let prev_val = self.value.unwrap();
+                    self.value = None;
+                    let new_val = self.calc();
+                    if prev_val == new_val {
+                        dbg!("No Change");
+                        return false;
+                    } else {
+                        dbg!(self.value);
+                        return true;
+                    }
+                }
+            }
+        } else {
+            //if it is a val
+            let mut rng = thread_rng();
+            let new_val = rng.gen_range(0,101);
+            self.value = Some(new_val);
+            true
+        }
     }
 }
 
@@ -90,13 +173,13 @@ impl fmt::Display for Node {
                     match self.value {
                         Some(val) => write!(
                             f,
-                            "<{} {}>([{}] [{}])",
-                            self.operation, val, self.children[0], self.children[1]
+                            "(<{} {}> {} {})",
+                             self.operation, val, self.children[0], self.children[1]
                         ),
                         None => write!(
                             f,
-                            "<{}>([{}] [{}])",
-                            self.operation, self.children[0], self.children[1]
+                            "(<{}> {} {})",
+                             self.operation, self.children[0], self.children[1]
                         ),
                     }
                 } else {
@@ -113,6 +196,7 @@ impl Calculable for Node {
         match self.operation {
             Operation::Add => match self.value {
                 Some(val) => {
+                    // dbg!("resuinging Val", val);
                     return val;
                 }
                 None => {
@@ -127,6 +211,7 @@ impl Calculable for Node {
             },
             Operation::Sub => match self.value {
                 Some(val) => {
+                    // dbg!("resuinging Val", val);
                     return val;
                 }
                 None => {
@@ -141,6 +226,7 @@ impl Calculable for Node {
             },
             Operation::Mul => match self.value {
                 Some(val) => {
+                    // dbg!("resuinging Val", val);
                     return val;
                 }
                 None => {
@@ -155,6 +241,7 @@ impl Calculable for Node {
             },
             Operation::Div => match self.value {
                 Some(val) => {
+                    // dbg!("resuinging Val", val);
                     return val;
                 }
                 None => {
@@ -172,11 +259,5 @@ impl Calculable for Node {
                 None => panic!("Val Op has no val set"),
             },
         }
-    }
-    fn ignore_memo_calc(&mut self) -> isize {
-        unimplemented!();
-        // match self.operation {
-
-        // }
     }
 }
