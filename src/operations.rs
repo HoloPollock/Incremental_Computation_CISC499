@@ -4,9 +4,11 @@ use rand::{
     Rng,
 };
 use std::fmt;
+
 pub trait Calculable {
     fn calc(&mut self) -> isize;
 }
+
 #[derive(Debug)]
 enum Choice {
     Left,
