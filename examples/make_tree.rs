@@ -5,7 +5,18 @@ fn main() {
         operation: Operation::Add,
         value: None,
         children: vec![
-            Node::new_val(12),
+            Node {
+                operation: Operation::Add,
+                value: None,
+                children: vec![
+                    Node::new_val(6),
+                    Node {
+                        operation: Operation::Div,
+                        value: None,
+                        children: vec![Node::new_val(25), Node::new_val(13)],
+                    },
+                ]
+            },
             Node {
                 operation: Operation::Mul,
                 value: None,
@@ -21,4 +32,9 @@ fn main() {
     println!("{}", tree);
 
     dbg!(tree.calc());
+    
+    tree.modify_and_calc();
+
+    println!("{}", tree);
+
 }
