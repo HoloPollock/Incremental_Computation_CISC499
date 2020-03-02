@@ -109,13 +109,18 @@ impl Node {
             false
         };
     }
-
-    pub fn modify_and_calc(&mut self) -> bool {
-        if self.is_val() == false {
+    // TODO encaplsulate in not stupid and public function return something used in the recursion
+    pub fn random_modify_and_calc(&mut self) -> bool {
+        if self.is_val() {
+            let mut rng = thread_rng();
+            let new_val = rng.gen_range(0, 101);
+            self.value = Some(new_val);
+            true
+        } else {
             match Choice::rand_choice() {
                 Choice::Left => {
                     //Modify and calc but move left if calc is the same return
-                    let is_change = self.children[0].modify_and_calc();
+                    let is_change = self.children[0].random_modify_and_calc();
                     match is_change {
                         true => {
                             dbg!(self.value);
@@ -136,7 +141,7 @@ impl Node {
                     }
                 }
                 Choice::Right => {
-                    let is_change = self.children[1].modify_and_calc();
+                    let is_change = self.children[1].random_modify_and_calc();
                     match is_change {
                         true => {
                             dbg!(self.value);
