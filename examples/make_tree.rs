@@ -15,7 +15,7 @@ fn main() {
                         value: None,
                         children: vec![Node::new_val(25), Node::new_val(13)],
                     },
-                ]
+                ],
             },
             Node {
                 operation: Operation::Mul,
@@ -32,9 +32,8 @@ fn main() {
     println!("{}", tree);
 
     dbg!(tree.calc());
-    
-    tree.modify_and_calc();
+
+    tree.random_modify_and_calc();
 
     println!("{}", tree);
-
 }
