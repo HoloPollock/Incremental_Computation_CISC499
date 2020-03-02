@@ -10,7 +10,7 @@ pub trait Calculable {
 }
 
 #[derive(Debug)]
-enum Choice {
+pub enum Choice {
     Left,
     Right,
     Op,
