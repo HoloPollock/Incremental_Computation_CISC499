@@ -25,7 +25,7 @@ impl Node {
             children: vec![],
         }
     }
-    pub fn is_val(&self) -> bool {
+    fn is_val(&self) -> bool {
         return if self.children.len() == 0 {
             true
         } else {

@@ -11,7 +11,7 @@ pub enum Choice {
 }
 
 impl Choice {
-    pub fn rand_choice() -> Self {
+    pub(crate) fn rand_choice() -> Self {
         let mut rng = thread_rng();
         return rng.gen();
     }

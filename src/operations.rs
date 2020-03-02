@@ -7,7 +7,7 @@ use std::{fmt, str::FromStr};
 
 use crate::error::ParseOperationError;
 
-#[derive(Debug)]
+#[derive(Debug, Hash, PartialEq, Eq)]
 pub enum Operation {
     Add,
     Sub,
@@ -31,7 +31,7 @@ impl FromStr for Operation {
 }
 
 impl Operation {
-    pub fn rand_op() -> Self {
+    pub(crate) fn rand_op() -> Self {
         let mut rng = thread_rng();
         return rng.gen();
     }
