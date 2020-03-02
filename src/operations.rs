@@ -3,7 +3,7 @@ use rand::{
     prelude::*,
     Rng,
 };
-use std::fmt;
+use std::{fmt, str::FromStr};
 
 use crate::error::ParseOperationError;
 
@@ -177,12 +177,80 @@ impl Node {
                     }
                 }
             }
-        } else {
-            //if it is a val
-            let mut rng = thread_rng();
-            let new_val = rng.gen_range(0, 101);
+        }
+    }
+    // TODO encaplsulate in not stupid and public function return something used in the recursion
+    pub fn define_modify_and_calc(
+        &mut self,
+        mut path: Vec<Choice>,
+        modification: &str,
+    ) -> bool {
+        if self.is_val() {
+            let new_val = modification.parse::<isize>().unwrap();
             self.value = Some(new_val);
             true
+        } else {
+            let choice = path.pop().unwrap();
+            match choice {
+                Choice::Left => {
+                    //Modify and calc but move left if calc is the same return
+                    let is_change = self.children[0].define_modify_and_calc(path, modification);
+                    match is_change {
+                        true => {
+                            dbg!(self.value);
+                            let prev_val = self.value.unwrap(); //May be none deal with
+                            self.value = None;
+                            let new_val = self.calc();
+                            if new_val == prev_val {
+                                dbg!("No Change");
+                                return false; // dont need to set as calc resets
+                            } else {
+                                dbg!(self.value);
+                                return true;
+                            }
+                        }
+                        false => {
+                            return false;
+                        }
+                    }
+                }
+                Choice::Right => {
+                    let is_change = self.children[1].define_modify_and_calc(path, modification);
+                    match is_change {
+                        true => {
+                            dbg!(self.value);
+                            let prev_val = self.value.unwrap(); //May be none deal with
+                            self.value = None;
+                            let new_val = self.calc();
+                            if new_val == prev_val {
+                                dbg!("No Change");
+                                return false; // dont need to set as calc resets
+                            } else {
+                                dbg!(self.value);
+                                return true;
+                            }
+                        }
+                        false => {
+                            return false;
+                        }
+                    }
+                }
+                Choice::Op => {
+                    let new_op = modification.parse::<Operation>().unwrap(); //debatebly good fix error type
+                    self.operation = new_op;
+                    dbg!(&self.value);
+                    let prev_val = self.value.unwrap();
+                    self.value = None;
+                    let new_val = self.calc();
+                    if prev_val == new_val {
+                        dbg!("No Change");
+                        return false;
+                    } else {
+                        dbg!(self.value);
+                        return true;
+                    }
+                }
+            }
         }
     }
 }
