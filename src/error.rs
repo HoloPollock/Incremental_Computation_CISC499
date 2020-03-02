@@ -1,4 +1,3 @@
-
 use std::fmt;
 
 #[derive(Clone, PartialEq, Eq)]
@@ -17,4 +16,3 @@ impl fmt::Debug for ParseOperationError {
 }
 
 impl std::error::Error for ParseOperationError {}
-

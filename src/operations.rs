@@ -180,11 +180,7 @@ impl Node {
         }
     }
     // TODO encaplsulate in not stupid and public function return something used in the recursion
-    pub fn define_modify_and_calc(
-        &mut self,
-        mut path: Vec<Choice>,
-        modification: &str,
-    ) -> bool {
+    pub fn define_modify_and_calc(&mut self, mut path: Vec<Choice>, modification: &str) -> bool {
         if self.is_val() {
             let new_val = modification.parse::<isize>().unwrap();
             self.value = Some(new_val);
