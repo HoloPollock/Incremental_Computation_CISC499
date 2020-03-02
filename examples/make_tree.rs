@@ -1,4 +1,8 @@
-use incremental_tree::operations::{Calculable, Node, Operation};
+use incremental_tree::{
+    self,
+    node::{Calculable, Node},
+    operations::Operation,
+};
 
 fn main() {
     let mut tree = Node {

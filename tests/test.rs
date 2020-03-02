@@ -1,4 +1,8 @@
-use incremental_tree::operations::*;
+use incremental_tree::{
+    choice::Choice,
+    node::{Calculable, Node},
+    operations::*,
+};
 
 #[test]
 fn test_no_op() {
