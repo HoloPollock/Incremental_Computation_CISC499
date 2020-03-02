@@ -5,6 +5,8 @@ use rand::{
 };
 use std::fmt;
 
+use crate::error::ParseOperationError;
+
 pub trait Calculable {
     fn calc(&mut self) -> isize;
 }
@@ -39,6 +41,20 @@ pub enum Operation {
     Mul,
     Div,
     Val,
+}
+
+impl FromStr for Operation {
+    type Err = ParseOperationError;
+
+    fn from_str(string: &str) -> Result<Self, Self::Err> {
+        match string {
+            "+" => Ok(Operation::Add),
+            "-" => Ok(Operation::Sub),
+            "*" => Ok(Operation::Mul),
+            "/" => Ok(Operation::Div),
+            _ => Err(ParseOperationError {}),
+        }
+    }
 }
 
 impl Operation {
