@@ -5,7 +5,10 @@ use std::{
     hash::{Hash, Hasher},
 };
 
-use crate::{choice::{Choice, OpChoice}, operations::Operation};
+use crate::{
+    choice::{Choice, OpChoice},
+    operations::Operation,
+};
 
 pub trait Calculable {
     fn calc(&mut self) -> isize;
@@ -29,7 +32,7 @@ impl Node {
         Node {
             operation: Operation::Val,
             value: Some(rand_num()),
-            children: vec![]
+            children: vec![],
         }
     }
     fn is_val(&self) -> bool {
@@ -53,7 +56,7 @@ impl Node {
                     OpChoice::Op => Self::gen_op(),
                     OpChoice::Val => Self::rand_val(),
                 },
-            ]
+            ],
         }
     }
     // TODO encaplsulate in not stupid and public function return something used in the recursion
@@ -323,5 +326,5 @@ impl Calculable for Node {
 
 fn rand_num() -> isize {
     let mut rng = thread_rng();
-    rng.gen_range(0,101)
+    rng.gen_range(0, 101)
 }
