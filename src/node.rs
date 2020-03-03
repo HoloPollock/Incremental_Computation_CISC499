@@ -13,7 +13,7 @@ use crate::{
 pub trait Calculable {
     fn calc(&mut self) -> isize;
 }
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Node {
     pub operation: Operation,
     pub value: Option<isize>,
@@ -301,16 +301,21 @@ impl Calculable for Node {
                     }
                 }
             },
-            Operation::Div => match self.value {
+            Operation::Div => match self.value { //For convince and not having dealing wiht undefined divinding by zero = zero 
                 Some(val) => {
-                    // dbg!("resuinging Val", val);
                     return val;
                 }
                 None => {
                     if self.children.len() == 2 {
-                        let result = self.children[0].calc() / self.children[1].calc();
-                        self.value = Some(result);
-                        return result;
+                        let denom = self.children[1].calc(); 
+                        if denom == 0{
+                            self.value = Some(0);
+                            return 0;
+                        } else {
+                            let result = self.children[0].calc() / denom;
+                            self.value = Some(result);
+                            return result;
+                        }
                     } else {
                         panic!("Incorrect numver of children");
                     }
