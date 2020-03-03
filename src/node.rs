@@ -301,14 +301,15 @@ impl Calculable for Node {
                     }
                 }
             },
-            Operation::Div => match self.value { //For convince and not having dealing wiht undefined divinding by zero = zero 
+            Operation::Div => match self.value {
+                //For convince and not having dealing wiht undefined divinding by zero = zero
                 Some(val) => {
                     return val;
                 }
                 None => {
                     if self.children.len() == 2 {
-                        let denom = self.children[1].calc(); 
-                        if denom == 0{
+                        let denom = self.children[1].calc();
+                        if denom == 0 {
                             self.value = Some(0);
                             return 0;
                         } else {
