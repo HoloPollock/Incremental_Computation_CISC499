@@ -7,7 +7,7 @@ use std::{fmt, str::FromStr};
 
 use crate::error::ParseOperationError;
 
-#[derive(Debug, Hash, PartialEq, Eq)]
+#[derive(Debug, Hash, PartialEq, Eq, Clone)]
 pub enum Operation {
     Add,
     Sub,
