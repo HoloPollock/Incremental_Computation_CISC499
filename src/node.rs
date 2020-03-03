@@ -25,6 +25,13 @@ impl Node {
             children: vec![],
         }
     }
+    pub fn rand_val() -> Self {
+        Node {
+            operation: Operation::Val,
+            value: Some(rand_num()),
+            children: vec![]
+        }
+    }
     fn is_val(&self) -> bool {
         return if self.children.len() == 0 {
             true
@@ -35,8 +42,7 @@ impl Node {
     // TODO encaplsulate in not stupid and public function return something used in the recursion
     pub fn random_modify_and_calc(&mut self) -> bool {
         if self.is_val() {
-            let mut rng = thread_rng();
-            let new_val = rng.gen_range(0, 101);
+            let new_val = rand_num();
             self.value = Some(new_val);
             true
         } else {
@@ -296,4 +302,9 @@ impl Calculable for Node {
             },
         }
     }
+}
+
+fn rand_num() -> isize {
+    let mut rng = thread_rng();
+    rng.gen_range(0,101)
 }
