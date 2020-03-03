@@ -5,7 +5,7 @@ use std::{
     hash::{Hash, Hasher},
 };
 
-use crate::{choice::Choice, operations::Operation};
+use crate::{choice::{Choice, OpChoice}, operations::Operation};
 
 pub trait Calculable {
     fn calc(&mut self) -> isize;
@@ -38,6 +38,23 @@ impl Node {
         } else {
             false
         };
+    }
+    pub fn gen_op() -> Self {
+        let op = Operation::rand_op();
+        Node {
+            operation: op,
+            value: None,
+            children: vec![
+                match OpChoice::rand() {
+                    OpChoice::Op => Self::gen_op(),
+                    OpChoice::Val => Self::rand_val(),
+                },
+                match OpChoice::rand() {
+                    OpChoice::Op => Self::gen_op(),
+                    OpChoice::Val => Self::rand_val(),
+                },
+            ]
+        }
     }
     // TODO encaplsulate in not stupid and public function return something used in the recursion
     pub fn random_modify_and_calc(&mut self) -> bool {
