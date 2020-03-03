@@ -26,3 +26,24 @@ impl Distribution<Choice> for Standard {
         }
     }
 }
+#[derive(Debug)]
+pub enum OpChoice {
+    Op,
+    Val,
+}
+
+impl OpChoice {
+    pub(crate) fn rand() -> Self {
+        let mut rng = thread_rng();
+        return rng.gen();
+    }
+}
+
+impl Distribution<OpChoice> for Standard {
+    fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> OpChoice {
+        match rng.gen_range(0, 2) {
+            0 => OpChoice::Op,
+            _ => OpChoice::Val,
+        }
+    }
+}
