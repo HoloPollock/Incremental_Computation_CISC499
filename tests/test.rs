@@ -1,7 +1,7 @@
 use incremental_tree::{
     choice::Choice,
     node::{Calculable, Node},
-    operations::*,
+    operations::Operation,
 };
 
 #[test]
