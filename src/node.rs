@@ -11,17 +11,17 @@ use crate::{
 };
 
 pub trait Calculable {
-    fn calc(&mut self) -> isize;
+    fn calc(&mut self) -> i128;
 }
 #[derive(Debug, Clone)]
-pub struct Node {
+pub struct Node  {
     pub operation: Operation,
-    pub value: Option<isize>,
+    pub value: Option<i128>,
     pub children: Vec<Node>,
 }
 
 impl Node {
-    pub fn new_val(val: isize) -> Self {
+    pub fn new_val(val: i128) -> Self {
         Node {
             operation: Operation::Val,
             value: Some(val),
@@ -131,7 +131,7 @@ impl Node {
     // TODO encaplsulate in not stupid and public function return something used in the recursion
     pub fn define_modify_and_calc(&mut self, mut path: Vec<Choice>, modification: &str) -> bool {
         if self.is_val() {
-            let new_val = modification.parse::<isize>().unwrap();
+            let new_val = modification.parse::<i128>().unwrap();
             self.value = Some(new_val);
             true
         } else {
@@ -254,7 +254,7 @@ impl Hash for Node {
 
 impl Calculable for Node {
     // This is kinda whack because it modified but doesnt sound like it should
-    fn calc(&mut self) -> isize {
+    fn calc(&mut self) -> i128 {
         match self.operation {
             Operation::Add => match self.value {
                 Some(val) => {
@@ -330,7 +330,7 @@ impl Calculable for Node {
     }
 }
 
-fn rand_num() -> isize {
+fn rand_num() -> i128 {
     let mut rng = thread_rng();
     rng.gen_range(0, 101)
 }
