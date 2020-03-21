@@ -213,6 +213,28 @@ impl Node {
             }
         }
     }
+
+    pub fn define_modify(&mut self, mut path: Vec<Choice>, modification: &str) {
+        if self.is_val() {
+            let new_val = modification.parse::<i128>().unwrap();
+            self.value = Some(new_val);
+        } else {
+            let choice = path.pop().unwrap();
+            match choice {
+                Choice::Left => {
+                    //Modify and calc but move left if calc is the same return
+                    self.children[0].define_modify(path, modification);
+                }
+                Choice::Right => {
+                    self.children[1].define_modify_and_calc(path, modification);
+                }
+                Choice::Op => {
+                    let new_op = modification.parse::<Operation>().unwrap(); //debatebly good fix error type
+                    self.operation = new_op;
+                }
+            }
+        }
+    }
 }
 
 impl fmt::Display for Node {
