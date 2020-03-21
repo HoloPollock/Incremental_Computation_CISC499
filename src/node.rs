@@ -59,6 +59,21 @@ impl Node {
             ],
         }
     }
+    pub fn gen_node_of_depth(n: usize) -> Self {
+        match n {
+            1 => Self::rand_val(),
+            _ => {
+                Node {
+                    operation: Operation::rand_op(),
+                    value: None,
+                    children: vec![
+                        Self::gen_node_of_depth(n-1),
+                        Self::gen_node_of_depth(n-1),
+                    ],
+                }
+            }
+        }
+    } 
     // TODO encaplsulate in not stupid and public function return something used in the recursion
     pub fn random_modify_and_calc(&mut self) -> bool {
         if self.is_val() {
