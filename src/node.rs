@@ -346,11 +346,12 @@ impl Calculable for Node {
                 None => {
                     if self.children.len() == 2 {
                         let denom = self.children[1].calc();
+                        let numon = self.children[0].calc();
                         if denom == 0 {
                             self.value = Some(0);
                             return 0;
                         } else {
-                            let result = self.children[0].calc() / denom;
+                            let result = numon / denom;
                             self.value = Some(result);
                             return result;
                         }
