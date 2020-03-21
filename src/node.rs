@@ -226,7 +226,7 @@ impl Node {
                     self.children[0].define_modify(path, modification);
                 }
                 Choice::Right => {
-                    self.children[1].define_modify_and_calc(path, modification);
+                    self.children[1].define_modify(path, modification);
                 }
                 Choice::Op => {
                     let new_op = modification.parse::<Operation>().unwrap(); //debatebly good fix error type
