@@ -1,9 +1,10 @@
 use criterion::{criterion_group, criterion_main, BatchSize, Criterion};
+use criterion_cycles_per_byte::CyclesPerByte;
 use incremental_tree::choice::Choice;
 use incremental_tree::node::{Calculable, Node};
 use std::time::Duration;
 
-pub fn criterion_benchmark(c: &mut Criterion) {
+pub fn criterion_benchmark(c: &mut Criterion<CyclesPerByte>) {
     let unmodfiedtree = Node::gen_node_of_depth(20);
     let mut calced_tree = unmodfiedtree.clone();
     calced_tree.calc();
@@ -41,7 +42,7 @@ pub fn criterion_benchmark(c: &mut Criterion) {
 
 criterion_group!(
     name = benches;
-    config = Criterion::default().measurement_time(Duration::from_secs(100000));
+    config = Criterion::default().with_measurement(CyclesPerByte).measurement_time(Duration::from_secs(100000));
     targets =  criterion_benchmark
 );
 criterion_main!(benches);
