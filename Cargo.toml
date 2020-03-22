@@ -17,6 +17,6 @@ criterion = "0.3.1"
 name = "list_change"
 harness = false
 
-[[bench]]
-name = "tree_change"
-harness = false
+# [[bench]]
+# name = "tree_change"
+# harness = false
