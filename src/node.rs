@@ -14,7 +14,7 @@ pub trait Calculable {
     fn calc(&mut self) -> i128;
 }
 #[derive(Debug, Clone)]
-pub struct Node  {
+pub struct Node {
     pub operation: Operation,
     pub value: Option<i128>,
     pub children: Vec<Node>,
@@ -62,18 +62,16 @@ impl Node {
     pub fn gen_node_of_depth(n: usize) -> Self {
         match n {
             1 => Self::rand_val(),
-            _ => {
-                Node {
-                    operation: Operation::rand_op(),
-                    value: None,
-                    children: vec![
-                        Self::gen_node_of_depth(n-1),
-                        Self::gen_node_of_depth(n-1),
-                    ],
-                }
-            }
+            _ => Node {
+                operation: Operation::rand_op(),
+                value: None,
+                children: vec![
+                    Self::gen_node_of_depth(n - 1),
+                    Self::gen_node_of_depth(n - 1),
+                ],
+            },
         }
-    } 
+    }
     // TODO encaplsulate in not stupid and public function return something used in the recursion
     pub fn random_modify_and_calc(&mut self) -> bool {
         if self.is_val() {
@@ -87,15 +85,15 @@ impl Node {
                     let is_change = self.children[0].random_modify_and_calc();
                     match is_change {
                         true => {
-                            dbg!(self.value);
+                            //dbg!(self.value);
                             let prev_val = self.value.unwrap(); //May be none deal with
                             self.value = None;
                             let new_val = self.calc();
                             if new_val == prev_val {
-                                dbg!("No Change");
+                                //dbg!("No Change");
                                 return false; // dont need to set as calc resets
                             } else {
-                                dbg!(self.value);
+                                //dbg!(self.value);
                                 return true;
                             }
                         }
@@ -108,15 +106,15 @@ impl Node {
                     let is_change = self.children[1].random_modify_and_calc();
                     match is_change {
                         true => {
-                            dbg!(self.value);
+                            //dbg!(self.value);
                             let prev_val = self.value.unwrap(); //May be none deal with
                             self.value = None;
                             let new_val = self.calc();
                             if new_val == prev_val {
-                                dbg!("No Change");
+                                //dbg!("No Change");
                                 return false; // dont need to set as calc resets
                             } else {
-                                dbg!(self.value);
+                                //dbg!(self.value);
                                 return true;
                             }
                         }
@@ -128,15 +126,15 @@ impl Node {
                 Choice::Op => {
                     let new_op = Operation::rand_op();
                     self.operation = new_op;
-                    dbg!(&self.value);
+                    //dbg!(&self.value);
                     let prev_val = self.value.unwrap();
                     self.value = None;
                     let new_val = self.calc();
                     if prev_val == new_val {
-                        dbg!("No Change");
+                        //dbg!("No Change");
                         return false;
                     } else {
-                        dbg!(self.value);
+                        //dbg!(self.value);
                         return true;
                     }
                 }
@@ -157,15 +155,15 @@ impl Node {
                     let is_change = self.children[0].define_modify_and_calc(path, modification);
                     match is_change {
                         true => {
-                            dbg!(self.value);
+                            //dbg!(self.value);
                             let prev_val = self.value.unwrap(); //May be none deal with
                             self.value = None;
                             let new_val = self.calc();
                             if new_val == prev_val {
-                                dbg!("No Change");
+                                //dbg!("No Change");
                                 return false; // dont need to set as calc resets
                             } else {
-                                dbg!(self.value);
+                                //dbg!(self.value);
                                 return true;
                             }
                         }
@@ -178,15 +176,15 @@ impl Node {
                     let is_change = self.children[1].define_modify_and_calc(path, modification);
                     match is_change {
                         true => {
-                            dbg!(self.value);
+                            //dbg!(self.value);
                             let prev_val = self.value.unwrap(); //May be none deal with
                             self.value = None;
                             let new_val = self.calc();
                             if new_val == prev_val {
-                                dbg!("No Change");
+                                //dbg!("No Change");
                                 return false; // dont need to set as calc resets
                             } else {
-                                dbg!(self.value);
+                                //dbg!(self.value);
                                 return true;
                             }
                         }
@@ -198,15 +196,15 @@ impl Node {
                 Choice::Op => {
                     let new_op = modification.parse::<Operation>().unwrap(); //debatebly good fix error type
                     self.operation = new_op;
-                    dbg!(&self.value);
+                    //dbg!(&self.value);
                     let prev_val = self.value.unwrap();
                     self.value = None;
                     let new_val = self.calc();
                     if prev_val == new_val {
-                        dbg!("No Change");
+                        //dbg!("No Change");
                         return false;
                     } else {
-                        dbg!(self.value);
+                        //dbg!(self.value);
                         return true;
                     }
                 }
@@ -295,7 +293,7 @@ impl Calculable for Node {
         match self.operation {
             Operation::Add => match self.value {
                 Some(val) => {
-                    // dbg!("resuinging Val", val);
+                    // //dbg!("resuinging Val", val);
                     return val;
                 }
                 None => {
@@ -310,7 +308,7 @@ impl Calculable for Node {
             },
             Operation::Sub => match self.value {
                 Some(val) => {
-                    // dbg!("resuinging Val", val);
+                    // //dbg!("resuinging Val", val);
                     return val;
                 }
                 None => {
@@ -325,7 +323,7 @@ impl Calculable for Node {
             },
             Operation::Mul => match self.value {
                 Some(val) => {
-                    // dbg!("resuinging Val", val);
+                    // //dbg!("resuinging Val", val);
                     return val;
                 }
                 None => {

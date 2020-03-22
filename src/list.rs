@@ -1,12 +1,10 @@
-
-use crate::node::{Node, Calculable};
+use crate::node::{Calculable, Node};
 use rbtree::RBTree;
 #[derive(Debug)]
 pub struct NodeList {
     pub list: Vec<Node>,
-    pub tree: RBTree<Node, ()> // Cant Use BtreeSet as doesnt accept duplicate values dont use and get style functions
+    pub tree: RBTree<Node, ()>, // Cant Use BtreeSet as doesnt accept duplicate values dont use and get style functions
 }
-
 
 impl Default for NodeList {
     fn default() -> Self {
@@ -18,13 +16,17 @@ impl Default for NodeList {
 }
 
 impl NodeList {
-    pub fn modify_first_element(){
+    pub fn modify_first_element() {
         unimplemented!()
     }
-    pub fn deifned_modify_first_element(){
+    pub fn deifned_modify_first_element() {
         unimplemented!();
     }
     fn modify_and_sort() {
+        unimplemented!()
+    }
+
+    pub fn modify_and_sort_from_scratch() {
         unimplemented!()
     }
 
@@ -33,9 +35,8 @@ impl NodeList {
             if i.value == None {
                 i.calc();
             }
-            self.tree.insert(i.clone(),());
+            self.tree.insert(i.clone(), ());
         }
-        
     }
     pub fn gen_random(size: isize) -> Self {
         let mut list: Self = Default::default();
