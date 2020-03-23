@@ -12,7 +12,7 @@ pub fn criterion_benchmark(c: &mut Criterion<CyclesPerByte>) {
         b.iter_batched(
             || unmodfiedtree.clone(),
             |mut tree| tree.calc(),
-            BatchSize::SmallInput,
+            BatchSize::LargeInput,
         );
     });
     c.bench_function("modified from scratch", |b| {
@@ -23,7 +23,7 @@ pub fn criterion_benchmark(c: &mut Criterion<CyclesPerByte>) {
                 return clean_tree;
             },
             |mut clean_tree| clean_tree.calc(),
-            BatchSize::SmallInput,
+            BatchSize::LargeInput,
         )
     });
     c.bench_function("incremental calc", |b| {
@@ -35,14 +35,14 @@ pub fn criterion_benchmark(c: &mut Criterion<CyclesPerByte>) {
             |mut inc_tree| {
                 inc_tree.define_modify_and_calc(vec![Choice::Op, Choice::Right, Choice::Left], "+");
             },
-            BatchSize::SmallInput,
+            BatchSize::LargeInput,
         )
     });
 }
 
 criterion_group!(
     name = benches;
-    config = Criterion::default().with_measurement(CyclesPerByte).measurement_time(Duration::from_secs(100000));
+    config = Criterion::default().with_measurement(CyclesPerByte).measurement_time(Duration::from_secs(30000));
     targets =  criterion_benchmark
 );
 criterion_main!(benches);
