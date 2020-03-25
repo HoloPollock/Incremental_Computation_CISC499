@@ -42,18 +42,18 @@ impl Node {
             false
         };
     }
-    pub fn gen_op() -> Self {
+    pub fn gen_node() -> Self {
         let op = Operation::rand_op();
         Node {
             operation: op,
             value: None,
             children: vec![
                 match OpChoice::rand() {
-                    OpChoice::Op => Self::gen_op(),
+                    OpChoice::Op => Self::gen_node(),
                     OpChoice::Val => Self::rand_val(),
                 },
                 match OpChoice::rand() {
-                    OpChoice::Op => Self::gen_op(),
+                    OpChoice::Op => Self::gen_node(),
                     OpChoice::Val => Self::rand_val(),
                 },
             ],
