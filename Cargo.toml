@@ -18,6 +18,6 @@ criterion-cycles-per-byte = "0.1.1"
 name = "list_change"
 harness = false
 
-# [[bench]]
-# name = "tree_change"
-# harness = false
+[[bench]]
+name = "tree_change"
+harness = false
