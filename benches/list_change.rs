@@ -65,7 +65,7 @@ pub fn benchmark_inital(c: &mut Criterion<CyclesPerByte>) {
 
 criterion_group!(
     name = benches;
-    config = Criterion::default().with_measurement(CyclesPerByte).measurement_time(Duration::from_secs(30000));
+    config = Criterion::default().with_measurement(CyclesPerByte).measurement_time(Duration::from_secs(3000));
     targets = benchmark_inital
 );
 criterion_main!(benches);

@@ -42,11 +42,12 @@ pub fn benchmark_nested(c: &mut Criterion<CyclesPerByte>) {
             );
         }
     }
+    group.finish();
 }
 
 criterion_group!(
     name = benches;
-    config = Criterion::default().with_measurement(CyclesPerByte).measurement_time(Duration::from_secs(30000));
-    targets =  benchmark_nested
+    config = Criterion::default().with_measurement(CyclesPerByte).measurement_time(Duration::from_secs(3000));
+    targets = benchmark_nested
 );
 criterion_main!(benches);

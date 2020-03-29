@@ -1,8 +1,8 @@
 use crate::{
     choice::Choice,
     node::{Calculable, Node},
+    rbtree::RBTree,
 };
-use rbtree::RBTree;
 #[derive(Debug, Clone)]
 pub struct NodeList {
     pub list: Vec<Node>,
@@ -20,26 +20,14 @@ impl Default for NodeList {
 
 impl NodeList {
     pub fn modify_first_element(&mut self) {
-        let first_node = self.tree.pop_first();
-        let new_node = match first_node {
-            Some(mut node) => {
-                node.0.random_modify_and_calc();
-                node.0
-            }
-            None => panic!("empty tree"),
-        };
-        self.tree.insert(new_node, ());
+        let mut first_node = self.tree.pop_first();
+        first_node.random_modify_and_calc();
+        self.tree.insert(first_node, ());
     }
-    pub fn defined_modify_first_element(&mut self, mut path: Vec<Choice>, modification: &str) {
-        let first_node = self.tree.pop_first();
-        let new_node = match first_node {
-            Some(mut node) => {
-                node.0.define_modify_and_calc(path, modification);
-                node.0
-            }
-            None => panic!("empty tree"),
-        };
-        self.tree.insert(new_node, ());
+    pub fn defined_modify_first_element(&mut self, path: Vec<Choice>, modification: &str) {
+        let mut first_node = self.tree.pop_first();
+        first_node.define_modify_and_calc(path, modification);
+        self.tree.insert(first_node, ());
     }
 
     pub fn modify_and_sort_from_scratch() {
