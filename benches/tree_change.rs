@@ -3,10 +3,10 @@ use criterion::{
     criterion_group, criterion_main, BatchSize, BenchmarkGroup, BenchmarkId, Criterion,
 };
 use criterion_cycles_per_byte::CyclesPerByte;
-use incremental_tree::list::NodeList;
 use incremental_tree::choice::Choice;
-use std::time::Duration;
+use incremental_tree::list::NodeList;
 use std::env;
+use std::time::Duration;
 
 pub fn benchmark_nested(c: &mut Criterion<CyclesPerByte>) {
     let mut group: BenchmarkGroup<CyclesPerByte> = c.benchmark_group("nested_compare");
@@ -35,11 +35,12 @@ pub fn benchmark_nested(c: &mut Criterion<CyclesPerByte>) {
                 &calced_and_sorted_list,
                 |b, cs_list| {
                     b.iter_batched(
-                        || {
-                            cs_list.clone()
-                        },
+                        || cs_list.clone(),
                         |mut list| {
-                            list.defined_modify_first_element(vec![Choice::Op, Choice::Right, Choice::Left], "+");
+                            list.defined_modify_first_element(
+                                vec![Choice::Op, Choice::Right, Choice::Left],
+                                "+",
+                            );
                         },
                         BatchSize::LargeInput,
                     )
@@ -52,7 +53,7 @@ pub fn benchmark_nested(c: &mut Criterion<CyclesPerByte>) {
 
 criterion_group!(
     name = benches;
-    config = Criterion::default().with_measurement(CyclesPerByte).measurement_time(Duration::from_secs(530));
+    config = Criterion::default().with_measurement(CyclesPerByte).measurement_time(Duration::from_secs(2000));
     targets = benchmark_nested
 );
 criterion_main!(benches);

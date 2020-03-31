@@ -226,13 +226,11 @@ impl Ord for Node {
         match self.value.cmp(&other.value) {
             Ordering::Less => Ordering::Less,
             Ordering::Greater => Ordering::Greater,
-            Ordering::Equal => {
-                match self.operation.cmp(&other.operation) {
-                    Ordering::Less => Ordering::Less,
-                    Ordering::Greater => Ordering::Greater,
-                    Ordering::Equal => self.children.cmp(&other.children)
-                }
-            }
+            Ordering::Equal => match self.operation.cmp(&other.operation) {
+                Ordering::Less => Ordering::Less,
+                Ordering::Greater => Ordering::Greater,
+                Ordering::Equal => self.children.cmp(&other.children),
+            },
         }
     }
 }
@@ -250,14 +248,10 @@ impl Hash for Node {
 }
 
 impl Calculable for Node {
-    // This is kinda whack because it modified but doesnt sound like it should
     fn calc(&mut self) -> i128 {
         match self.operation {
             Operation::Add => match self.value {
-                Some(val) => {
-                    // //dbg!("resuinging Val", val);
-                    val
-                }
+                Some(val) => val,
                 None => {
                     if self.children.len() == 2 {
                         let result = self.children[0].calc() + self.children[1].calc();
