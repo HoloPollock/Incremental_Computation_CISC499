@@ -386,7 +386,7 @@ where
                     nodes[id].right = Self::put(nodes[id].right, Some(id), key, value, nodes);
                 }
                 Ordering::Equal => {
-                    nodes[id].right = Self::put(nodes[id].right, Some(id), key, value, nodes);
+                    nodes[id].value = value; //duplicates lead to infinte recusion sorry
                 }
             }
             nodes[id].size =

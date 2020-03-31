@@ -223,7 +223,17 @@ impl Eq for Node {}
 
 impl Ord for Node {
     fn cmp(&self, other: &Self) -> Ordering {
-        self.value.cmp(&other.value)
+        match self.value.cmp(&other.value) {
+            Ordering::Less => Ordering::Less,
+            Ordering::Greater => Ordering::Greater,
+            Ordering::Equal => {
+                match self.operation.cmp(&other.operation) {
+                    Ordering::Less => Ordering::Less,
+                    Ordering::Greater => Ordering::Greater,
+                    Ordering::Equal => self.children.cmp(&other.children)
+                }
+            }
+        }
     }
 }
 
