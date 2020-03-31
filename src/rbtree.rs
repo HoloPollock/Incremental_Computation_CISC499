@@ -171,14 +171,14 @@ where
             }
             None => None,
         };
-        return node;
+        node
     }
 
     pub fn pop_first(&mut self) -> K {
         let root = self.get_root();
         let val = root.unwrap();
         self.delete(&val);
-        return val;
+        val
     }
 
     pub fn insert(&mut self, key: K, value: V) {

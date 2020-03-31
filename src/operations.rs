@@ -33,7 +33,7 @@ impl FromStr for Operation {
 impl Operation {
     pub(crate) fn rand_op() -> Self {
         let mut rng = thread_rng();
-        return rng.gen();
+        rng.gen()
     }
 }
 

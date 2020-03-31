@@ -1,3 +1,4 @@
+#![recursion_limit = "2048"]
 use criterion::{
     criterion_group, criterion_main, BatchSize, BenchmarkGroup, BenchmarkId, Criterion,
 };

@@ -36,11 +36,7 @@ impl Node {
         }
     }
     fn is_val(&self) -> bool {
-        return if self.children.len() == 0 {
-            true
-        } else {
-            false
-        };
+        self.children.is_empty()
     }
     pub fn gen_node() -> Self {
         let op = Operation::rand_op();
@@ -89,16 +85,10 @@ impl Node {
                             let prev_val = self.value.unwrap(); //May be none deal with
                             self.value = None;
                             let new_val = self.calc();
-                            if new_val == prev_val {
-                                //dbg!("No Change");
-                                return false; // dont need to set as calc resets
-                            } else {
-                                //dbg!(self.value);
-                                return true;
-                            }
+                            new_val != prev_val
                         }
                         false => {
-                            return false;
+                            false
                         }
                     }
                 }
@@ -110,16 +100,10 @@ impl Node {
                             let prev_val = self.value.unwrap(); //May be none deal with
                             self.value = None;
                             let new_val = self.calc();
-                            if new_val == prev_val {
-                                //dbg!("No Change");
-                                return false; // dont need to set as calc resets
-                            } else {
-                                //dbg!(self.value);
-                                return true;
-                            }
+                            new_val != prev_val
                         }
                         false => {
-                            return false;
+                            false
                         }
                     }
                 }
@@ -130,13 +114,7 @@ impl Node {
                     let prev_val = self.value.unwrap();
                     self.value = None;
                     let new_val = self.calc();
-                    if prev_val == new_val {
-                        //dbg!("No Change");
-                        return false;
-                    } else {
-                        //dbg!(self.value);
-                        return true;
-                    }
+                    prev_val != new_val
                 }
             }
         }
@@ -159,16 +137,10 @@ impl Node {
                             let prev_val = self.value.unwrap(); //May be none deal with
                             self.value = None;
                             let new_val = self.calc();
-                            if new_val == prev_val {
-                                //dbg!("No Change");
-                                return false; // dont need to set as calc resets
-                            } else {
-                                //dbg!(self.value);
-                                return true;
-                            }
+                            new_val != prev_val
                         }
                         false => {
-                            return false;
+                            false
                         }
                     }
                 }
@@ -180,16 +152,10 @@ impl Node {
                             let prev_val = self.value.unwrap(); //May be none deal with
                             self.value = None;
                             let new_val = self.calc();
-                            if new_val == prev_val {
-                                //dbg!("No Change");
-                                return false; // dont need to set as calc resets
-                            } else {
-                                //dbg!(self.value);
-                                return true;
-                            }
+                            new_val != prev_val
                         }
                         false => {
-                            return false;
+                            false
                         }
                     }
                 }
@@ -200,13 +166,7 @@ impl Node {
                     let prev_val = self.value.unwrap();
                     self.value = None;
                     let new_val = self.calc();
-                    if prev_val == new_val {
-                        //dbg!("No Change");
-                        return false;
-                    } else {
-                        //dbg!(self.value);
-                        return true;
-                    }
+                    prev_val != new_val
                 }
             }
         }
@@ -294,13 +254,13 @@ impl Calculable for Node {
             Operation::Add => match self.value {
                 Some(val) => {
                     // //dbg!("resuinging Val", val);
-                    return val;
+                    val
                 }
                 None => {
                     if self.children.len() == 2 {
                         let result = self.children[0].calc() + self.children[1].calc();
                         self.value = Some(result);
-                        return result;
+                        result
                     } else {
                         panic!("Incorrect number of children");
                     }
@@ -308,14 +268,13 @@ impl Calculable for Node {
             },
             Operation::Sub => match self.value {
                 Some(val) => {
-                    // //dbg!("resuinging Val", val);
-                    return val;
+                    val
                 }
                 None => {
                     if self.children.len() == 2 {
                         let result = self.children[0].calc() - self.children[1].calc();
                         self.value = Some(result);
-                        return result;
+                        result
                     } else {
                         panic!("Incorrect number of children");
                     }
@@ -323,14 +282,13 @@ impl Calculable for Node {
             },
             Operation::Mul => match self.value {
                 Some(val) => {
-                    // //dbg!("resuinging Val", val);
-                    return val;
+                    val
                 }
                 None => {
                     if self.children.len() == 2 {
                         let result = self.children[0].calc() * self.children[1].calc();
                         self.value = Some(result);
-                        return result;
+                        result
                     } else {
                         panic!("Incorrect number of children");
                     }
@@ -339,7 +297,7 @@ impl Calculable for Node {
             Operation::Div => match self.value {
                 //For convince and not having dealing wiht undefined divinding by zero = zero
                 Some(val) => {
-                    return val;
+                    val
                 }
                 None => {
                     if self.children.len() == 2 {
@@ -347,11 +305,11 @@ impl Calculable for Node {
                         let numon = self.children[0].calc();
                         if denom == 0 {
                             self.value = Some(0);
-                            return 0;
+                            0
                         } else {
                             let result = numon / denom;
                             self.value = Some(result);
-                            return result;
+                            result
                         }
                     } else {
                         panic!("Incorrect numver of children");
@@ -359,7 +317,7 @@ impl Calculable for Node {
                 }
             },
             Operation::Val => match self.value {
-                Some(val) => return val,
+                Some(val) => val,
                 None => panic!("Val Op has no val set"),
             },
         }

@@ -47,13 +47,13 @@ impl NodeList {
         for _i in 0..size {
             list.list.push(Node::gen_node());
         }
-        return list;
+        list
     }
     pub fn gen_random_of_depth(size: usize, n: usize) -> Self {
         let mut list: Self = Default::default();
         for _i in 0..size {
             list.list.push(Node::gen_node_of_depth(n))
         }
-        return list;
+        list
     }
 }
