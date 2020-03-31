@@ -87,9 +87,7 @@ impl Node {
                             let new_val = self.calc();
                             new_val != prev_val
                         }
-                        false => {
-                            false
-                        }
+                        false => false,
                     }
                 }
                 Choice::Right => {
@@ -102,9 +100,7 @@ impl Node {
                             let new_val = self.calc();
                             new_val != prev_val
                         }
-                        false => {
-                            false
-                        }
+                        false => false,
                     }
                 }
                 Choice::Op => {
@@ -139,9 +135,7 @@ impl Node {
                             let new_val = self.calc();
                             new_val != prev_val
                         }
-                        false => {
-                            false
-                        }
+                        false => false,
                     }
                 }
                 Choice::Right => {
@@ -154,9 +148,7 @@ impl Node {
                             let new_val = self.calc();
                             new_val != prev_val
                         }
-                        false => {
-                            false
-                        }
+                        false => false,
                     }
                 }
                 Choice::Op => {
@@ -267,9 +259,7 @@ impl Calculable for Node {
                 }
             },
             Operation::Sub => match self.value {
-                Some(val) => {
-                    val
-                }
+                Some(val) => val,
                 None => {
                     if self.children.len() == 2 {
                         let result = self.children[0].calc() - self.children[1].calc();
@@ -281,9 +271,7 @@ impl Calculable for Node {
                 }
             },
             Operation::Mul => match self.value {
-                Some(val) => {
-                    val
-                }
+                Some(val) => val,
                 None => {
                     if self.children.len() == 2 {
                         let result = self.children[0].calc() * self.children[1].calc();
@@ -296,9 +284,7 @@ impl Calculable for Node {
             },
             Operation::Div => match self.value {
                 //For convince and not having dealing wiht undefined divinding by zero = zero
-                Some(val) => {
-                    val
-                }
+                Some(val) => val,
                 None => {
                     if self.children.len() == 2 {
                         let denom = self.children[1].calc();
