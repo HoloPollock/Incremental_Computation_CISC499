@@ -12,7 +12,7 @@ pub fn benchmark_nested(c: &mut Criterion<CyclesPerByte>) {
         for j in 5..=20 {
             let parameter_string = format!("list of {} nodes with depth of {}", i, j);
             let n_list = NodeList::gen_random_of_depth(*i, j);
-            let mut calced_and_sorted_list = n_list.clone();
+            let mut calced_and_sorted_list = Box::new(n_list.clone());
             calced_and_sorted_list.sort();
             group.bench_with_input(
                 BenchmarkId::new("from_scatch", &parameter_string),
