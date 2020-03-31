@@ -6,12 +6,13 @@ use criterion_cycles_per_byte::CyclesPerByte;
 use incremental_tree::list::NodeList;
 use incremental_tree::choice::Choice;
 use std::time::Duration;
+use std::env;
 
 pub fn benchmark_nested(c: &mut Criterion<CyclesPerByte>) {
     let mut group: BenchmarkGroup<CyclesPerByte> = c.benchmark_group("nested_compare");
-
-    for i in [100, 300, 600, 900, 1200, 1600, 2000].iter() {
-        for j in 5..=20 {
+    env::set_var("RUST_BACKTRACE", "1");
+    for i in [100, 600, 1200, 2000].iter() {
+        for j in 10..=20 {
             let parameter_string = format!("list of {} nodes with depth of {}", i, j);
             let n_list = NodeList::gen_random_of_depth(*i, j);
             let mut calced_and_sorted_list = Box::new(n_list.clone());
@@ -25,7 +26,7 @@ pub fn benchmark_nested(c: &mut Criterion<CyclesPerByte>) {
                         |mut list| {
                             list.sort();
                         },
-                        BatchSize::PerIteration,
+                        BatchSize::LargeInput,
                     );
                 },
             );
@@ -51,7 +52,7 @@ pub fn benchmark_nested(c: &mut Criterion<CyclesPerByte>) {
 
 criterion_group!(
     name = benches;
-    config = Criterion::default().with_measurement(CyclesPerByte).measurement_time(Duration::from_secs(3000));
+    config = Criterion::default().with_measurement(CyclesPerByte).measurement_time(Duration::from_secs(530));
     targets = benchmark_nested
 );
 criterion_main!(benches);
