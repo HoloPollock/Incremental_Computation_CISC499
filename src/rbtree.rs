@@ -109,26 +109,6 @@ impl DeleteResult {
     }
 }
 
-///
-/// A Red-Black BST Implementation, using a Vec for storing the actual node data.
-/// Rather than linking directly from one node to another, each node's `left` and `right`
-/// fields contain an `Option<usize>`, where `Some(id)` refers to an index within the `nodes` Vec.
-///
-/// Inspiration for this approach taken from various examples using a vector-based _arena_.
-///
-/// The design goals here were to keep the tree data exclusively inside of the vector in order to
-/// take advantage of performance optimizations resulting from use of contiguous blocks of memory.
-///
-/// It remains to be seen if this actually speeds things up, pending some benchmarking.
-///
-/// The trick with all recursive data structures I've seen so far, is in satisfying the borrow checker.
-/// This was solved by making it so that all node manipulations are done by moving only `Copy` values,
-/// so as to circumvent the _cannot move from borrowed value_ error.
-///
-/// The algorithm itself is Robert Sedgewick's algorithm as [written in java](https://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html).
-/// While I found some discussion online describing O(1) fixups, the implementations seem
-/// overly complex, and I'm satisfied with O(log(N)) fixups.
-///
 impl<K, V> RBTree<K, V>
 where
     K: Ord + Debug + Clone,
