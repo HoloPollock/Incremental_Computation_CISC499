@@ -23,7 +23,7 @@ pub fn benchmark_nested(c: &mut Criterion<CyclesPerByte>) {
                         |mut list| {
                             list.sort();
                         },
-                        BatchSize::LargeInput,
+                        BatchSize::PerIteration,
                     );
                 },
             );
@@ -36,7 +36,7 @@ pub fn benchmark_nested(c: &mut Criterion<CyclesPerByte>) {
                         |mut list| {
                             list.modify_first_element();
                         },
-                        BatchSize::LargeInput,
+                        BatchSize::PerIteration,
                     )
                 },
             );
