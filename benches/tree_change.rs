@@ -4,6 +4,7 @@ use criterion::{
 };
 use criterion_cycles_per_byte::CyclesPerByte;
 use incremental_tree::list::NodeList;
+use incremental_tree::choice::Choice;
 use std::time::Duration;
 
 pub fn benchmark_nested(c: &mut Criterion<CyclesPerByte>) {
@@ -33,11 +34,13 @@ pub fn benchmark_nested(c: &mut Criterion<CyclesPerByte>) {
                 &calced_and_sorted_list,
                 |b, cs_list| {
                     b.iter_batched(
-                        || cs_list.clone(),
-                        |mut list| {
-                            list.modify_first_element();
+                        || {
+                            cs_list.clone()
                         },
-                        BatchSize::PerIteration,
+                        |mut list| {
+                            list.defined_modify_first_element(vec![Choice::Op, Choice::Right, Choice::Left], "+");
+                        },
+                        BatchSize::LargeInput,
                     )
                 },
             );
