@@ -10,7 +10,6 @@ use std::time::Duration;
 
 pub fn benchmark_nested(c: &mut Criterion<CyclesPerByte>) {
     let mut group: BenchmarkGroup<CyclesPerByte> = c.benchmark_group("nested_compare");
-    env::set_var("RUST_BACKTRACE", "1");
     for i in [100, 600, 1200, 2000].iter() {
         for j in 10..=20 {
             let parameter_string = format!("list of {} nodes with depth of {}", i, j);
