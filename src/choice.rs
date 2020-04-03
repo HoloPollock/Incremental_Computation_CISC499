@@ -3,7 +3,7 @@ use rand::{
     prelude::*,
     Rng,
 };
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum Choice {
     Left,
     Right,

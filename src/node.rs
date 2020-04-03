@@ -115,18 +115,22 @@ impl Node {
             }
         }
     }
+
+    pub fn define_modify_and_calc(&mut self, path: Vec<Choice>, modification: &str){
+        self.define_modify_and_calc_in(path.as_slice(), modification);
+    } 
     // TODO encaplsulate in not stupid and public function return something used in the recursion
-    pub fn define_modify_and_calc(&mut self, mut path: Vec<Choice>, modification: &str) -> bool {
+    pub (crate) fn define_modify_and_calc_in(&mut self, path: &[Choice], modification: &str) -> bool {
         if self.is_val() {
             let new_val = modification.parse::<i128>().unwrap();
             self.value = Some(new_val);
             true
         } else {
-            let choice = path.pop().unwrap();
-            match choice {
-                Choice::Left => {
+            // let choice = path.pop().unwrap();
+            match path {
+                [Choice::Left, end @ ..] => {
                     //Modify and calc but move left if calc is the same return
-                    let is_change = self.children[0].define_modify_and_calc(path, modification);
+                    let is_change = self.children[0].define_modify_and_calc_in(end, modification);
                     match is_change {
                         true => {
                             //dbg!(self.value);
@@ -138,8 +142,8 @@ impl Node {
                         false => false,
                     }
                 }
-                Choice::Right => {
-                    let is_change = self.children[1].define_modify_and_calc(path, modification);
+                [Choice::Right, end @ ..] => {
+                    let is_change = self.children[1].define_modify_and_calc_in(end, modification);
                     match is_change {
                         true => {
                             //dbg!(self.value);
@@ -151,7 +155,7 @@ impl Node {
                         false => false,
                     }
                 }
-                Choice::Op => {
+                [Choice::Op, ..] => {
                     let new_op = modification.parse::<Operation>().unwrap(); //debatebly good fix error type
                     self.operation = new_op;
                     //dbg!(&self.value);
@@ -159,6 +163,9 @@ impl Node {
                     self.value = None;
                     let new_val = self.calc();
                     prev_val != new_val
+                }
+                [] => {
+                    panic!("List Empty and not at val");
                 }
             }
         }

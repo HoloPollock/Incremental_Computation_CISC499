@@ -51,7 +51,7 @@ pub fn benchmark_inital(c: &mut Criterion<CyclesPerByte>) {
                     },
                     |mut inc_tree| {
                         inc_tree.define_modify_and_calc(
-                            vec![Choice::Op, Choice::Right, Choice::Left],
+                            vec![Choice::Left, Choice::Right, Choice::Op],
                             "+",
                         );
                     },

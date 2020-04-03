@@ -38,7 +38,7 @@ pub fn benchmark_nested(c: &mut Criterion<CyclesPerByte>) {
                         || cs_list.clone(),
                         |mut list| {
                             list.defined_modify_first_element(
-                                vec![Choice::Op, Choice::Right, Choice::Left],
+                                vec![Choice::Left, Choice::Right, Choice::Op],
                                 "+",
                             );
                         },
