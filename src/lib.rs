@@ -34,7 +34,7 @@ mod test {
         let vec_changes = vec![Choice::Right, Choice::Op];
         let modi = "+";
         tree.calc();
-        let did_change = tree.define_modify_and_calc_in(vec_changes.as_slice(), modi);
+        let did_change = tree.internal_define_modify_and_calc(vec_changes.as_slice(), modi);
         assert!(!did_change);
     }
 }

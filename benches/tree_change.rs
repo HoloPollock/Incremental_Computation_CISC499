@@ -5,7 +5,6 @@ use criterion::{
 use criterion_cycles_per_byte::CyclesPerByte;
 use incremental_tree::choice::Choice;
 use incremental_tree::list::NodeList;
-use std::env;
 use std::time::Duration;
 
 pub fn benchmark_nested(c: &mut Criterion<CyclesPerByte>) {

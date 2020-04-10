@@ -117,10 +117,10 @@ impl Node {
     }
 
     pub fn define_modify_and_calc(&mut self, path: Vec<Choice>, modification: &str){
-        self.define_modify_and_calc_in(path.as_slice(), modification);
+        self.internal_define_modify_and_calc(path.as_slice(), modification);
     } 
     // TODO encaplsulate in not stupid and public function return something used in the recursion
-    pub (crate) fn define_modify_and_calc_in(&mut self, path: &[Choice], modification: &str) -> bool {
+    pub (crate) fn internal_define_modify_and_calc(&mut self, path: &[Choice], modification: &str) -> bool {
         if self.is_val() {
             let new_val = modification.parse::<i128>().unwrap();
             self.value = Some(new_val);
@@ -130,7 +130,7 @@ impl Node {
             match path {
                 [Choice::Left, end @ ..] => {
                     //Modify and calc but move left if calc is the same return
-                    let is_change = self.children[0].define_modify_and_calc_in(end, modification);
+                    let is_change = self.children[0].internal_define_modify_and_calc(end, modification);
                     match is_change {
                         true => {
                             //dbg!(self.value);
@@ -143,7 +143,7 @@ impl Node {
                     }
                 }
                 [Choice::Right, end @ ..] => {
-                    let is_change = self.children[1].define_modify_and_calc_in(end, modification);
+                    let is_change = self.children[1].internal_define_modify_and_calc(end, modification);
                     match is_change {
                         true => {
                             //dbg!(self.value);
@@ -171,23 +171,29 @@ impl Node {
         }
     }
 
-    pub fn define_modify(&mut self, mut path: Vec<Choice>, modification: &str) {
+    pub fn define_modify(&mut self, path: Vec<Choice>, modification: &str) {
+        self.internal_define_modify(path.as_slice(), modification);
+    }
+
+    fn internal_define_modify(&mut self, path: &[Choice], modification: &str) {
         if self.is_val() {
             let new_val = modification.parse::<i128>().unwrap();
             self.value = Some(new_val);
         } else {
-            let choice = path.pop().unwrap();
-            match choice {
-                Choice::Left => {
+            match path {
+                [Choice::Left, end @ ..] => {
                     //Modify and calc but move left if calc is the same return
-                    self.children[0].define_modify(path, modification);
+                    self.children[0].internal_define_modify(end, modification);
                 }
-                Choice::Right => {
-                    self.children[1].define_modify(path, modification);
+                [Choice::Right, end @ ..] => {
+                    self.children[1].internal_define_modify(end, modification);
                 }
-                Choice::Op => {
+                [Choice::Op,..] => {
                     let new_op = modification.parse::<Operation>().unwrap(); //debatebly good fix error type
                     self.operation = new_op;
+                }
+                [] => {
+                    panic!("List Empty and not at val");
                 }
             }
         }
