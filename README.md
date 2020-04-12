@@ -174,7 +174,7 @@ run enough iterations of > 5050, which is the set iterations required
 for 100 samples in the given time.
 
 <figure>
-    <img src="/photos/lines-32.png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/lines-32.png" style="margin: 0 auto; max-width: 400px; background-color:white;">
     <figcaption><em>Fig 1. Results of Non-Nested Benchmarks[^1]</em></figcaption>
 </figure>
 
@@ -207,7 +207,7 @@ benchmarks were not able to finish. So the data collected will only be
 for a K of 100
 
 <figure>
-    <img src="/photos/image001.png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/image001.png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 2. Result of Nested Benchmarks[^3]</em></figcaption>
 </figure>
 
@@ -242,67 +242,67 @@ incremental computation it may be something to look in to.
 # Appendix
 
 <figure>
-    <img src="/photos/violin(5).png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/violin(5).png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 3. /photos/violin Plot of non-nested benchmark with n of 5</em></figcaption>
 </figure>
 <figure>
-    <img src="/photos/violin(6).png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/violin(6).png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 4. /photos/violin Plot of non-nested benchmark with n of 6</em></figcaption>
 </figure>
 <figure>
-    <img src="/photos/violin(7).png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/violin(7).png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 5. /photos/violin Plot of non-nested benchmark with n of 7</em></figcaption>
 </figure>
 <figure>
-    <img src="/photos/violin(8).png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/violin(8).png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 6. /photos/violin Plot of non-nested benchmark with n of 8</em></figcaption>
 </figure>
 <figure>
-    <img src="/photos/violin(9).png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/violin(9).png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 7. /photos/violin Plot of non-nested benchmark with n of 9</em></figcaption>
 </figure>
 <figure>
-    <img src="/photos/violin(10).png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/violin(10).png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 8. /photos/violin Plot of non-nested benchmark with n of 10</em></figcaption>
 </figure>
 <figure>
-    <img src="/photos/violin(11).png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/violin(11).png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 9. /photos/violin Plot of non-nested benchmark with n of 11</em></figcaption>
 </figure>
 <figure>
-    <img src="/photos/violin(12).png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/violin(12).png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 10. /photos/violin Plot of non-nested benchmark with n of 12</em></figcaption>
 </figure>
 <figure>
-    <img src="/photos/violin(13).png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/violin(13).png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 11. /photos/violin Plot of non-nested benchmark with n of 13</em></figcaption>
 </figure>
 <figure>
-    <img src="/photos/violin(14).png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/violin(14).png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 12. /photos/violin Plot of non-nested benchmark with n of 14</em></figcaption>
 </figure>
 <figure>
-    <img src="/photos/violin(15).png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/violin(15).png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 13. /photos/violin Plot of non-nested benchmark with n of 15</em></figcaption>
 </figure>
 <figure>
-    <img src="/photos/violin(16).png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/violin(16).png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 14. /photos/violin Plot of non-nested benchmark with n of 16</em></figcaption>
 </figure>
 <figure>
-    <img src="/photos/violin(17).png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/violin(17).png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 15. /photos/violin Plot of non-nested benchmark with n of 17</em></figcaption>
 </figure>
 <figure>
-    <img src="/photos/violin(18).png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/violin(18).png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 16. /photos/violin Plot of non-nested benchmark with n of 18</em></figcaption>
 </figure>
 <figure>
-    <img src="/photos/violin(19).png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/violin(19).png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 17. /photos/violin Plot of non-nested benchmark with n of 19</em></figcaption>
 </figure>
 <figure>
-    <img src="/photos/violin(20).png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/violin(20).png" style="margin: 0 auto; max-width: 400px;background-color:white;">
     <figcaption><em>Fig 18. /photos/violin Plot of non-nested benchmark with n of 20</em></figcaption>
 </figure>
 
