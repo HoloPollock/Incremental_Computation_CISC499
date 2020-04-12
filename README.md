@@ -17,9 +17,9 @@ calculate $4+6\div2$ ; this algorithm — assuming it follows order of
 operations – would calculate $6\div2$  then $4+3$  and return 7 as
 expected. However, if then next, it was asked to calculate $5+6\div2$ ,
 the algorithm would calculate $6\div2$  then $5+3$  redoing the
-division operation. While in this case, division is an effortless
-operation, imagine this was being done on a computer where division was
-very complex or instead of division it was some very complex function
+di/photos/vision operation. While in this case, di/photos/vision is an effortless
+operation, imagine this was being done on a computer where di/photos/vision was
+very complex or instead of di/photos/vision it was some very complex function
 then storing the result of $6\div2$  in a memo table would drastically
 improve the speed of the calculation. However, memoization does have
 some problem for it to be an effective technique; the computation it is
@@ -31,14 +31,14 @@ time, if the time is after 12:15 pm instead of returning the computed
 arithmetic expression, our function returns 0. Now, if we had $6\div2$ 
 stored in our memo table as 3, then if our function were run after 12:15
 pm our function would return the wrong result. Incremental Computation
-can also be about managing evolving data structures such as an example
+can also be about managing evol/photos/ving data structures such as an example
 from the paper "Purely Functional Incremental Computing: where they show
 an example of an incremental program in which the goal is only to have a
-view of odd values. They show an example how if you have already
-computed the view of odd values if you need to add a number to the view
+/photos/view of odd values. They show an example how if you have already
+computed the /photos/view of odd values if you need to add a number to the /photos/view
 rather than adding all the new numbers to the source regardless of
-whether it is even or odd then recomputing the view you can take the
-already computed view and insert the new odd values into it
+whether it is even or odd then recomputing the /photos/view you can take the
+already computed /photos/view and insert the new odd values into it
 
 ## Nested Incremental Computation
 
@@ -97,10 +97,10 @@ tree is modified.
 
 To incrementally calculate the new value of a tree when a change is made
 the function recursively parses down to the defined spot of the change,
-then it makes the changes it then stores the previous value set in a
+then it makes the changes it then stores the pre/photos/vious value set in a
 temporary variable, after that it the `calc` function is called on the
 subtree where that node of modification is the root, once it gets the
-newly calculated value if the value is the same as the previous value
+newly calculated value if the value is the same as the pre/photos/vious value
 stored in temporary value the function returns false and this bubbles
 back up the tree, however, if the value changes the function returns
 true. This process is repeated for the parent node until the root of the
@@ -112,16 +112,16 @@ The goal of this section was to store a set of trees in sorted order and
 be able to incrementally add a new element, or modify an element of the
 set. Just as the example of showing odd values in a list from the
 introduction section showed, that rather than starting from scratch with
-the whole list of values adding the new ones then recalculating the view
+the whole list of values adding the new ones then recalculating the /photos/view
 of just odd values, an incremental and faster way of doing that would be
-to take the already calculated view and just add the new values into
-that view, I thought was rather than when inserting a value or modifying
+to take the already calculated /photos/view and just add the new values into
+that /photos/view, I thought was rather than when inserting a value or modifying
 the set starting from an unsorted list, why not save the work that has
 already been done and just find the location that the new element should
-go and insert it there saving the sort.\* Based on this, my initial idea
+go and insert it there sa/photos/ving the sort.\* Based on this, my initial idea
 was to use a vector. However, when adding an element, this would require
-moving every element down by one after the insertion point. This
-behaviour was undesirable. So for this stage, a B-Tree was used as the
+mo/photos/ving every element down by one after the insertion point. This
+beha/photos/viour was undesirable. So for this stage, a B-Tree was used as the
 collection to store the trees. A B-tree is a specialized form of search
 tree which, just like a Red-Black Tree, is balanced. However, a B-Tree
 optimizes for disk space by allowing each node to contain more than one
@@ -174,7 +174,7 @@ run enough iterations of > 5050, which is the set iterations required
 for 100 samples in the given time.
 
 <figure>
-    <img src="lines-32.png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/lines-32.png" style="margin: 0 auto; max-width: 400px;">
     <figcaption><em>Fig 1. Results of Non-Nested Benchmarks[^1]</em></figcaption>
 </figure>
 
@@ -207,7 +207,7 @@ benchmarks were not able to finish. So the data collected will only be
 for a K of 100
 
 <figure>
-    <img src="image001.png" style="margin: 0 auto; max-width: 400px;">
+    <img src="/photos/image001.png" style="margin: 0 auto; max-width: 400px;">
     <figcaption><em>Fig 2. Result of Nested Benchmarks[^3]</em></figcaption>
 </figure>
 
@@ -220,14 +220,14 @@ which it happens.
 
 # Conclusion
 
-Obviously the results mostly speak for them self, however there are
-obviously some caveats in saying that, first of all in general my code
+Ob/photos/viously the results mostly speak for them self, however there are
+ob/photos/viously some caveats in saying that, first of all in general my code
 is written to optimize for incremental computation. For example in from
 scratch version of the nested calculation maybe it would be faster you
 have stored them in a vector and used something like quick-sort rather
 than storing in the B-Tree, as it would need to get used later. As well
-obviously my example is a little contrived as math for computers is
-fairly trivial and adding and entire tree structure on the arithmetic
+ob/photos/viously my example is a little contrived as math for computers is
+fairly tri/photos/vial and adding and entire tree structure on the arithmetic
 expressions would slow down the calculations. As well when you look at
 the amount of operations required to have the incremental version be
 worth it, it does bring in to questions the realistic use case for
@@ -242,72 +242,72 @@ incremental computation it may be something to look in to.
 # Appendix
 
 <figure>
-    <img src="violin(5).png" style="margin: 0 auto; max-width: 400px;">
-    <figcaption><em>Fig 3. Violin Plot of non-nested benchmark with n of 5</em></figcaption>
+    <img src="/photos/violin(5).png" style="margin: 0 auto; max-width: 400px;">
+    <figcaption><em>Fig 3. /photos/violin Plot of non-nested benchmark with n of 5</em></figcaption>
 </figure>
 <figure>
-    <img src="violin(6).png" style="margin: 0 auto; max-width: 400px;">
-    <figcaption><em>Fig 4. Violin Plot of non-nested benchmark with n of 6</em></figcaption>
+    <img src="/photos/violin(6).png" style="margin: 0 auto; max-width: 400px;">
+    <figcaption><em>Fig 4. /photos/violin Plot of non-nested benchmark with n of 6</em></figcaption>
 </figure>
 <figure>
-    <img src="violin(7).png" style="margin: 0 auto; max-width: 400px;">
-    <figcaption><em>Fig 5. Violin Plot of non-nested benchmark with n of 7</em></figcaption>
+    <img src="/photos/violin(7).png" style="margin: 0 auto; max-width: 400px;">
+    <figcaption><em>Fig 5. /photos/violin Plot of non-nested benchmark with n of 7</em></figcaption>
 </figure>
 <figure>
-    <img src="violin(8).png" style="margin: 0 auto; max-width: 400px;">
-    <figcaption><em>Fig 6. Violin Plot of non-nested benchmark with n of 8</em></figcaption>
+    <img src="/photos/violin(8).png" style="margin: 0 auto; max-width: 400px;">
+    <figcaption><em>Fig 6. /photos/violin Plot of non-nested benchmark with n of 8</em></figcaption>
 </figure>
 <figure>
-    <img src="violin(9).png" style="margin: 0 auto; max-width: 400px;">
-    <figcaption><em>Fig 7. Violin Plot of non-nested benchmark with n of 9</em></figcaption>
+    <img src="/photos/violin(9).png" style="margin: 0 auto; max-width: 400px;">
+    <figcaption><em>Fig 7. /photos/violin Plot of non-nested benchmark with n of 9</em></figcaption>
 </figure>
 <figure>
-    <img src="violin(10).png" style="margin: 0 auto; max-width: 400px;">
-    <figcaption><em>Fig 8. Violin Plot of non-nested benchmark with n of 10</em></figcaption>
+    <img src="/photos/violin(10).png" style="margin: 0 auto; max-width: 400px;">
+    <figcaption><em>Fig 8. /photos/violin Plot of non-nested benchmark with n of 10</em></figcaption>
 </figure>
 <figure>
-    <img src="violin(11).png" style="margin: 0 auto; max-width: 400px;">
-    <figcaption><em>Fig 9. Violin Plot of non-nested benchmark with n of 11</em></figcaption>
+    <img src="/photos/violin(11).png" style="margin: 0 auto; max-width: 400px;">
+    <figcaption><em>Fig 9. /photos/violin Plot of non-nested benchmark with n of 11</em></figcaption>
 </figure>
 <figure>
-    <img src="violin(12).png" style="margin: 0 auto; max-width: 400px;">
-    <figcaption><em>Fig 10. Violin Plot of non-nested benchmark with n of 12</em></figcaption>
+    <img src="/photos/violin(12).png" style="margin: 0 auto; max-width: 400px;">
+    <figcaption><em>Fig 10. /photos/violin Plot of non-nested benchmark with n of 12</em></figcaption>
 </figure>
 <figure>
-    <img src="violin(13).png" style="margin: 0 auto; max-width: 400px;">
-    <figcaption><em>Fig 11. Violin Plot of non-nested benchmark with n of 13</em></figcaption>
+    <img src="/photos/violin(13).png" style="margin: 0 auto; max-width: 400px;">
+    <figcaption><em>Fig 11. /photos/violin Plot of non-nested benchmark with n of 13</em></figcaption>
 </figure>
 <figure>
-    <img src="violin(14).png" style="margin: 0 auto; max-width: 400px;">
-    <figcaption><em>Fig 12. Violin Plot of non-nested benchmark with n of 14</em></figcaption>
+    <img src="/photos/violin(14).png" style="margin: 0 auto; max-width: 400px;">
+    <figcaption><em>Fig 12. /photos/violin Plot of non-nested benchmark with n of 14</em></figcaption>
 </figure>
 <figure>
-    <img src="violin(15).png" style="margin: 0 auto; max-width: 400px;">
-    <figcaption><em>Fig 13. Violin Plot of non-nested benchmark with n of 15</em></figcaption>
+    <img src="/photos/violin(15).png" style="margin: 0 auto; max-width: 400px;">
+    <figcaption><em>Fig 13. /photos/violin Plot of non-nested benchmark with n of 15</em></figcaption>
 </figure>
 <figure>
-    <img src="violin(16).png" style="margin: 0 auto; max-width: 400px;">
-    <figcaption><em>Fig 14. Violin Plot of non-nested benchmark with n of 16</em></figcaption>
+    <img src="/photos/violin(16).png" style="margin: 0 auto; max-width: 400px;">
+    <figcaption><em>Fig 14. /photos/violin Plot of non-nested benchmark with n of 16</em></figcaption>
 </figure>
 <figure>
-    <img src="violin(17).png" style="margin: 0 auto; max-width: 400px;">
-    <figcaption><em>Fig 15. Violin Plot of non-nested benchmark with n of 17</em></figcaption>
+    <img src="/photos/violin(17).png" style="margin: 0 auto; max-width: 400px;">
+    <figcaption><em>Fig 15. /photos/violin Plot of non-nested benchmark with n of 17</em></figcaption>
 </figure>
 <figure>
-    <img src="violin(18).png" style="margin: 0 auto; max-width: 400px;">
-    <figcaption><em>Fig 16. Violin Plot of non-nested benchmark with n of 18</em></figcaption>
+    <img src="/photos/violin(18).png" style="margin: 0 auto; max-width: 400px;">
+    <figcaption><em>Fig 16. /photos/violin Plot of non-nested benchmark with n of 18</em></figcaption>
 </figure>
 <figure>
-    <img src="violin(19).png" style="margin: 0 auto; max-width: 400px;">
-    <figcaption><em>Fig 17. Violin Plot of non-nested benchmark with n of 19</em></figcaption>
+    <img src="/photos/violin(19).png" style="margin: 0 auto; max-width: 400px;">
+    <figcaption><em>Fig 17. /photos/violin Plot of non-nested benchmark with n of 19</em></figcaption>
 </figure>
 <figure>
-    <img src="violin(20).png" style="margin: 0 auto; max-width: 400px;">
-    <figcaption><em>Fig 18. Violin Plot of non-nested benchmark with n of 20</em></figcaption>
+    <img src="/photos/violin(20).png" style="margin: 0 auto; max-width: 400px;">
+    <figcaption><em>Fig 18. /photos/violin Plot of non-nested benchmark with n of 20</em></figcaption>
 </figure>
 
 [^1]: As the number get large quick comparisons at smaller input values look skewed for more detailed comparison check index
 
-[^2]: This time only two were used as from the previous result the from scratch and a modified but still from scratch should produce a similar result so for time reason only a from scratch was tested.
+[^2]: This time only two were used as from the pre/photos/vious result the from scratch and a modified but still from scratch should produce a similar result so for time reason only a from scratch was tested.
 
-[^3]: Once again the smaller values of n look like they are the same for the from scratch and nested calculations this is just a illusion created by the higher n values having such large cycle counts
+[^3]: Once again the smaller values of n look like they are the same for the from scratch and nested calculations this is just a illusion created by the higher n values ha/photos/ving such large cycle counts
